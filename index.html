@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Antemans Automagiska ToDo-lista</title>
+     <link rel="stylesheet" type="text/css" href="css/style.css">
+</head>
+<body>
+    <header>
+        <h1>Antemans Automagiska ToDo-lista</h1>
+    </header>
+    <main>
+        
+        <section class="input-container" id="inputSection">
+            <h3>Mata in en ny uppgift</h3>
+            <input type="text" id="newTaskInput" placeholder="Lägg till en ny uppgift...">
+            <button id="addButton">Lägg till</button>
+        </section>
+        <section id="tasklist">
+            <h3>Uppgifter</h3>
+            <p class="explanation">Klicka på en uppgift för att klarmarkera</p>
+            <p class="undo-expl">En uppgift som klarmarkerats kan ångras med ett klick</p>
+            <ul id="todoList">
+            </ul>
+        </section>
+            
+        
+    </main>
+
+    <!-- <script src="https://unpkg.com/xss@1.0.14/dist/xss.min.js"></script> -->
+    <script src="scripts/myscript.js" type="module"></script>
+
+</body>
+</html>

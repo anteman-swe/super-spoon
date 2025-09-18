@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Antemans Automagiska ToDo-lista</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=delete" />
      <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 <body>
@@ -12,24 +13,24 @@
     </header>
     <main>
         
-        <section class="input-container" id="inputSection">
+        <section class="input-container">
             <h3>Mata in en ny uppgift</h3>
             <input type="text" id="newTaskInput" placeholder="Lägg till en ny uppgift...">
             <button id="addButton">Lägg till</button>
         </section>
+
         <section id="tasklist">
-            <h3>Uppgifter</h3>
+            <div id="tasklist-container"><h3>Uppgifter</h3><p id="readyItems"></p></div>
             <p class="explanation">Klicka på en uppgift för att klarmarkera</p>
-            <p class="undo-expl">En uppgift som klarmarkerats kan ångras med ett klick</p>
+            <p class="undo-expl">En uppgift som klarmarkerats kan ångras med ett klick och raderas med dubbelklick</p>
             <ul id="todoList">
             </ul>
-        </section>
             
-        
+        </section>          
+        <span class="material-symbols-outlined">delete</span>
     </main>
 
-    <!-- <script src="https://unpkg.com/xss@1.0.14/dist/xss.min.js"></script> -->
-    <script src="scripts/myscript.js" type="module"></script>
+    <script src="scripts/myscript.js"></script>
 
 </body>
 </html>

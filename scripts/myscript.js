@@ -202,7 +202,7 @@ function addToDo() {
     }
     updateReady(readyItemCounter);
 }
-// Function to run first of all after page is loaded so todo-list gets loaded
+// Function to run first of all after page is loaded so todo-list gets loaded into the DOM
 function firstRun() {
     todoList = getFromLocal();
     if (todoList){

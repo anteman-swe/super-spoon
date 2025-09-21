@@ -27,51 +27,86 @@ main {
   height: 100vh;
   display: flex;
   justify-content: center;
-  gap: 4rem;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
 }
 main h3 {
   font-size: 1.5rem;
 }
 main .input-container {
-  text-align: end;
+  width: 40%;
+  max-width: 30vmax;
   border-right: 2px solid black;
-  padding-right: 4rem;
+  padding: 2rem;
+}
+main .input-container h1 {
+  width: 100%;
+  text-align: left;
 }
 main .input-container #newTaskInput {
-  width: 95%;
+  width: 99%;
   height: 2rem;
 }
-main .input-container #addButton {
+main .input-container .button-container {
+  width: 100%;
+  text-align: right;
+}
+main .input-container .button-container #addButton {
   margin-top: 10px;
   width: 80px;
   height: 20px;
+}
+main .input-container #task-already-exist {
+  margin-top: 2rem;
+  font-size: 0.9rem;
+  color: red;
+}
+main #tasklist {
+  padding: 2rem;
+  width: 40%;
+  max-width: 30vmax;
 }
 main #tasklist #tasklist-container {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
+main #tasklist #tasklist-container #readyItems {
+  width: 250px;
+  height: 20px;
+  text-align: center;
+  font-size: 1rem;
+  padding: 5px;
+  border: 1px solid black;
+}
 main #tasklist ul {
-  list-style-type: circle;
+  list-style-type: none;
 }
 main #tasklist li {
-  font-size: 0.8rem;
+  width: 400px;
+  border-bottom: 1px dotted rgb(100, 100, 100);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  line-height: 1rem;
+  font-size: 1rem;
   padding: 0.2rem;
   vertical-align: middle;
+  cursor: pointer;
 }
 main #tasklist .explanation {
   font-size: 18px;
+  margin-bottom: 0;
 }
 main #tasklist .undo-expl {
   font-size: 12px;
+  margin-top: 0;
 }
 main #tasklist .itemDone {
   color: rgb(0, 128, 0);
   text-decoration: line-through;
 }
 main #tasklist .material-symbols-outlined {
-  font-size: 0.8rem;
-  padding-top: 0.2rem;
-  font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
+  vertical-align: bottom;
+  font-size: 1rem;
+  font-variation-settings: "FILL" 0.2, "wght" 300, "GRAD" 0, "opsz" 24;
 }/*# sourceMappingURL=style.css.map */

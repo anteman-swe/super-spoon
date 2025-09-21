@@ -12,24 +12,23 @@
         <h1>Antemans Automagiska ToDo-lista</h1>
     </header>
     <main>
-        
+        <!-- Section with input -->
         <section class="input-container">
-            <h3>Mata in en ny uppgift</h3>
+            <h3>Lägg till en ny uppgift</h3>
             <input type="text" id="newTaskInput" placeholder="Lägg till en ny uppgift...">
-            <button id="addButton">Lägg till</button>
+            <div class="button-container"><button id="addButton">Lägg till</button></div>
+            <div id="task-already-exist"></div>
         </section>
-
+        <!-- Section with my tasklist -->
         <section id="tasklist">
             <div id="tasklist-container"><h3>Uppgifter</h3><p id="readyItems"></p></div>
             <p class="explanation">Klicka på en uppgift för att klarmarkera</p>
-            <p class="undo-expl">En uppgift som klarmarkerats kan ångras med ett klick och raderas med dubbelklick</p>
+            <p class="undo-expl">En uppgift som klarmarkerats kan ångras med ett klick och raderas med dubbelklick eller skräpkorgen</p>
             <ul id="todoList">
             </ul>
-            
         </section>          
-        <span class="material-symbols-outlined">delete</span>
     </main>
-
+    <script src="scripts/purify.js"></script>
     <script src="scripts/myscript.js"></script>
 
 </body>

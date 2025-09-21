@@ -163,16 +163,25 @@ const cleanInput = (textToClean) => {
     return cleanText;
 }
 
+const resetWarning = () => {
+    taskAlreadyExist.textContent = "";
+}
+
+const cleanInputField = () => {
+    inputField.value = "";
+}
+
 // Function to add tasks to the todolist
 function addToDo() {
     let itemToAddInput = inputField.value;
+    
     // If input is empty or doesn't exist we do nothing
     if (!(itemToAddInput == '' || itemToAddInput == null)) {
         // Sending input to be cleaned by DOMPurify
         const  itemToAddClean = cleanInput(itemToAddInput);
 
         // #################################################### Under this line, we do not use dirty input itemToAddInput
-        
+
         // We check if task already exist, if not we can add it
         const checkTaskExist = taskFinder(itemToAddClean);
 
@@ -181,8 +190,8 @@ function addToDo() {
         
         // If task didn't exist we will add it / (-1) = task didn't exist
         if (checkTaskExist == -1){
-            // Clean comment-field
-            taskAlreadyExist.textContent = "";
+            // Clean comment-field just to be sure
+            resetWarning;
             
             // Send the task to be added to list in DOM
             addRowToHTML(taskToAdd);
@@ -194,14 +203,21 @@ function addToDo() {
             saveToLocal(taskToAdd);
             
             // Last we clean the the input field
-            inputField.value = "";
+            cleanInputField;
         } else {
             // If task already existed, we let the user know
             taskAlreadyExist.textContent = "Den uppgiften finns redan, försök med ett annat namn."
+            setTimeout(cleanInputField, 3200);
+            setTimeout(resetWarning, 3000);
         }
+    } else {
+        taskAlreadyExist.textContent = "Du måste skriva något i inmatningsfältet för att skapa en uppgift";
+        setTimeout(resetWarning, 3000);
+        
     }
     updateReady(readyItemCounter);
 }
+
 // Function to run first of all after page is loaded so todo-list gets loaded into the DOM
 function firstRun() {
     todoList = getFromLocal();

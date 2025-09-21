@@ -191,7 +191,7 @@ function addToDo() {
         // If task didn't exist we will add it / (-1) = task didn't exist
         if (checkTaskExist == -1){
             // Clean comment-field just to be sure
-            resetWarning;
+            resetWarning();
             
             // Send the task to be added to list in DOM
             addRowToHTML(taskToAdd);
@@ -203,7 +203,7 @@ function addToDo() {
             saveToLocal(taskToAdd);
             
             // Last we clean the the input field
-            cleanInputField;
+            cleanInputField();
         } else {
             // If task already existed, we let the user know
             taskAlreadyExist.textContent = "Den uppgiften finns redan, försök med ett annat namn."

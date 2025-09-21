@@ -1,7 +1,7 @@
 // My javascript used for a todo-list
 
 // Declaring global variabels and constants
-let todoList = [];
+let todoList = []; // Starting with an empty arry for tasks, it will get filled by saved items or by user
 const inputField = document.querySelector('#newTaskInput');
 const addButton = document.querySelector('#addButton');
 const listShown = document.querySelector('#todoList');
@@ -9,22 +9,9 @@ const readyItems = document.querySelector('#readyItems');
 const taskAlreadyExist = document.querySelector('#task-already-exist');
 
 let readyItemCounter = 0;
-
 // ##################################################################################################
 
-// Adding listeners if addButton and inputField exists, if not log out an error message in console
-if (addButton && inputField) {
-    addButton.addEventListener('click', addToDo);
-    inputField.addEventListener('keydown', (event) => {
-        if (event.key == 'Enter') {
-            addToDo();
-        }
-        return;
-    });
-}
-else {
-    console.log('Variabler kopplade till DOM har returnerat null');
-}
+
 
 // #################### Functions to work with local storage ########################################
 // Function to save task to local storage
@@ -52,9 +39,9 @@ const getFromLocal = () => {
     return savedTaskArray;
 }
 
-// ####################################################################################################
+// ##################################################################################################
 
-// ###################### Functions to manipulate the DOM #############################################
+// ###################### Functions to manipulate the DOM ###########################################
 // Function to add ONE row of the tasklist to the DOM 
 const addRowToHTML = (taskItem) => {
     // Her we create all neccesary DOM nodes for our task
@@ -81,9 +68,39 @@ const addRowToHTML = (taskItem) => {
             listShown.appendChild(itemAdd);
 }
 
-// Function to run first of all after page is loaded so todo-list gets loaded into the DOM
+// Update the visible readycounter in page
+const updateReady = (readyCount) => {    
+    if (readyCount > 0) {
+        readyItems.textContent = `${readyCount} uppgifter färdiga`;
+        readyItems.style.backgroundColor = 'rgb(0, 128, 0, 0.5)';
+    }
+    else if (readyCount == 0 && todoList.length == 0) {
+        readyItems.textContent = `Det finns inga uppgifter att göra`;
+        readyItems.style.backgroundColor = 'rgb(255, 128, 128, 0.5)';
+    }
+    else {
+        readyItems.textContent = `${readyCount} uppgifter färdiga`;
+        readyItems.style.backgroundColor = 'rgb(0, 255, 0, 0.1)';
+    }
+}
+
+// Function to run first of all after page is loaded so listeners is added and todo-list gets loaded into the DOM
 function firstRun() {
+    // Making sure the input field is clean at start
     cleanInputField();
+    // Adding listeners if addButton and inputField exists, if not log out an error message in console
+    if (addButton && inputField) {
+        addButton.addEventListener('click', addToDo);
+        inputField.addEventListener('keydown', (event) => {
+            if (event.key == 'Enter') {
+                addToDo();
+            }
+            return;
+        });
+    }
+    else {
+        console.log('Variabler kopplade till DOM har returnerat null');
+    }
     todoList = getFromLocal();
     if (todoList){
         todoList.forEach(item => {
@@ -96,9 +113,9 @@ function firstRun() {
         todoList = [];
     }
 }
-// ##########################################################################################################
+// ##################################################################################################
 
-// ##################### Functions misc #####################################################################
+// ##################### Functions misc #############################################################
 
 // Using DOMPurify to clean the input from any bad content
 const cleanInput = (textToClean) => {
@@ -115,9 +132,9 @@ const resetWarning = () => {
 const cleanInputField = () => {
     inputField.value = "";
 }
-// ##########################################################################################################
+// ##################################################################################################
 
-// ##################### Functions to manipulate tasks ######################################################
+// ##################### Functions to manipulate tasks ##############################################
 
 // Function to find the index in task-array of a given task
 const taskFinder = (findText) => {
@@ -134,22 +151,6 @@ const taskFinder = (findText) => {
         arrayCounter++;
     });
     return arrayIndex;
-}
-
-// Update the visible readycounter in page
-const updateReady = (readyCount) => {    
-    if (readyCount > 0) {
-        readyItems.textContent = `${readyCount} uppgifter färdiga`;
-        readyItems.style.backgroundColor = 'rgb(0, 128, 0, 0.5)';
-    }
-    else if (readyCount == 0 && todoList.length == 0) {
-        readyItems.textContent = `Det finns inga uppgifter att göra`;
-        readyItems.style.backgroundColor = 'rgb(255, 128, 128, 0.5)';
-    }
-    else {
-        readyItems.textContent = `${readyCount} uppgifter färdiga`;
-        readyItems.style.backgroundColor = 'rgb(0, 255, 0, 0.1)';
-    }
 }
 
 // Function to udate a task status, if done then undone and vice versa
@@ -184,7 +185,6 @@ const changeTask = (klick) => {
         // Update visible readycounter
         updateReady(readyItemCounter);
     }
-    
 }
 
 //Function to remove items from list, both visble, saved array and local storage
@@ -214,7 +214,7 @@ function addToDo() {
         // Sending input to be cleaned by DOMPurify
         const  itemToAddClean = cleanInput(itemToAddInput);
 
-        // #################################################### Under this line, we do not use dirty input itemToAddInput
+        // ######## Under this line, we do not use dirty input itemToAddInput #######################
 
         // We check if task already exist, if not we can add it
         const checkTaskExist = taskFinder(itemToAddClean);
@@ -252,7 +252,7 @@ function addToDo() {
     updateReady(readyItemCounter);
 }
 
-// #############################################################################################################################
+// ##################################################################################################
 
 // Check if there is any saved tasks from before
 firstRun();

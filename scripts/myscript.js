@@ -114,11 +114,12 @@ const changeTask = (klick) => {
     if (!(itemToChange == -1)) {
         
         // If task is already done, change it back to undone, otherwise mark it as done and last update readycounter
-        if (whichItem.classList.contains('itemDone') && todoList[itemToChange.done]) {
+        if (whichItem.classList.contains('itemDone') && todoList[itemToChange].done) {
             whichItem.classList.remove('itemDone');
             todoList[itemToChange].done = false;
             if (readyItemCounter > 0) {
                 readyItemCounter--;
+                console.log('item to not done');
             }
             // We also update the task in localStorage
             updateLocalDone(itemToChange, false);
@@ -126,6 +127,7 @@ const changeTask = (klick) => {
             whichItem.classList.add('itemDone');
             todoList[itemToChange].done = true;
             readyItemCounter++;
+            console.log('Item to done');
 
             // We also update the task in localStorage
             updateLocalDone(itemToChange, true);

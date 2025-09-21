@@ -9,6 +9,9 @@ const readyItems = document.querySelector('#readyItems');
 const taskAlreadyExist = document.querySelector('#task-already-exist');
 
 let readyItemCounter = 0;
+
+// -------------------------------------------------------------------------------------------------
+
 // Adding listeners if addButton and inputField exists, if not log out an error message in console
 if (addButton && inputField) {
     addButton.addEventListener('click', addToDo);
@@ -23,6 +26,7 @@ else {
     console.log('Variabler kopplade till DOM har returnerat null');
 }
 
+// #################### Functions to work with local storage ########################################
 // Function to save task to local storage
 const saveToLocal = (itemToSave, index = (todoList.length - 1)) => {
     localStorage.setItem(`task${index}`, JSON.stringify(itemToSave));
@@ -48,7 +52,11 @@ const getFromLocal = () => {
     return savedTaskArray;
 }
 
-const addRowToHTML = (taskItem) =>{
+// ####################################################################################################
+
+// ###################### Functions to manipulate the DOM #############################################
+// Function to add ONE row of the tasklist to the DOM 
+const addRowToHTML = (taskItem) => {
     // Her we create all neccesary DOM nodes for our task
             const itemAdd = document.createElement('li');
             const itemText = document.createElement('span');
@@ -73,6 +81,45 @@ const addRowToHTML = (taskItem) =>{
             listShown.appendChild(itemAdd);
 }
 
+// Function to run first of all after page is loaded so todo-list gets loaded into the DOM
+function firstRun() {
+    cleanInputField();
+    todoList = getFromLocal();
+    if (todoList){
+        todoList.forEach(item => {
+            addRowToHTML(item);
+            if (item.done) {
+                readyItemCounter++;
+            }   
+        });
+    } else {
+        todoList = [];
+    }
+}
+// ##########################################################################################################
+
+// ##################### Functions misc #####################################################################
+
+// Using DOMPurify to clean the input from any bad content
+const cleanInput = (textToClean) => {
+    const cleanText = DOMPurify.sanitize(textToClean);
+    return cleanText;
+}
+
+// reset warning message
+const resetWarning = () => {
+    taskAlreadyExist.textContent = "";
+}
+
+// Clean the input field
+const cleanInputField = () => {
+    inputField.value = "";
+}
+// ##########################################################################################################
+
+// ##################### Functions to manipulate tasks ######################################################
+
+// Function to find the index in task-array of a given task
 const taskFinder = (findText) => {
     // find the task in the array and return index, if none found return '-1'
     let arrayIndex = -1;
@@ -105,6 +152,7 @@ const updateReady = (readyCount) => {
     }
 }
 
+// Function to udate a task status, if done then undone and vice versa
 const changeTask = (klick) => {
     const whichItem = klick.target;
     // Check if task exist in tasklist array
@@ -139,9 +187,9 @@ const changeTask = (klick) => {
     
 }
 
-//Function to remove items from list, both visble and saved array
-const removeTask = (Klick) => {
-    const whichItem = Klick.target;
+//Function to remove items from list, both visble, saved array and local storage
+const removeTask = (klick) => {
+    const whichItem = klick.target;
     const textToSearch = whichItem.parentNode.firstChild.textContent;
     const itemToRemove = taskFinder(textToSearch);
 
@@ -157,21 +205,7 @@ const removeTask = (Klick) => {
     updateReady(readyItemCounter);
 }
 
-// Using DOMPurify to clean the input from any bad content
-const cleanInput = (textToClean) => {
-    const cleanText = DOMPurify.sanitize(textToClean);
-    return cleanText;
-}
-
-const resetWarning = () => {
-    taskAlreadyExist.textContent = "";
-}
-
-const cleanInputField = () => {
-    inputField.value = "";
-}
-
-// Function to add tasks to the todolist
+// Function to add tasks to the todolist, DOM, Array and Local Storage
 function addToDo() {
     let itemToAddInput = inputField.value;
     
@@ -218,21 +252,7 @@ function addToDo() {
     updateReady(readyItemCounter);
 }
 
-// Function to run first of all after page is loaded so todo-list gets loaded into the DOM
-function firstRun() {
-    cleanInputField();
-    todoList = getFromLocal();
-    if (todoList){
-        todoList.forEach(item => {
-            addRowToHTML(item);
-            if (item.done) {
-                readyItemCounter++;
-            }   
-        });
-    } else {
-        todoList = [];
-    }
-}
+// #############################################################################################################################
 
 // Check if there is any saved tasks from before
 firstRun();

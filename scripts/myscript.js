@@ -220,6 +220,7 @@ function addToDo() {
 
 // Function to run first of all after page is loaded so todo-list gets loaded into the DOM
 function firstRun() {
+    cleanInputField();
     todoList = getFromLocal();
     if (todoList){
         todoList.forEach(item => {

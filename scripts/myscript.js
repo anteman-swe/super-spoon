@@ -10,7 +10,7 @@ const taskAlreadyExist = document.querySelector('#task-already-exist');
 
 let readyItemCounter = 0;
 
-// -------------------------------------------------------------------------------------------------
+// ##################################################################################################
 
 // Adding listeners if addButton and inputField exists, if not log out an error message in console
 if (addButton && inputField) {

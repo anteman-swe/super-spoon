@@ -146,6 +146,8 @@ const cleanInputField = () => {
 
 // Function to find the index in task-array of a given task
 const taskFinder = (findText) => {
+    // First of all reload the todolist from local storage
+    todoList = getFromLocal();
     // find the task in the array and return index, if none found return '-1'
     let arrayIndex = -1;
     let arrayCounter = 0;

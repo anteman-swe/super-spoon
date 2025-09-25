@@ -144,7 +144,7 @@ const cleanInputField = () => {
 
 // ##################### Functions to manipulate tasks ##############################################
 
-// Function to find the index in task-array of a given task
+// Function to find the index in todoList of a given task
 const taskFinder = (findText) => {
     // First of all reload the todolist from local storage
     todoList = getFromLocal();

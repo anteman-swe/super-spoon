@@ -30,12 +30,20 @@ const updateLocalDone = (item, state) => {
 const getFromLocal = () => { 
     let indexCounter = 0;
     let  savedTaskArray = [];
-    while (localStorage.getItem(`task${indexCounter}`)) {
-        let retrievedObject = JSON.parse(localStorage.getItem(`task${indexCounter}`));
+    while (indexCounter < localStorage.length) {
+        let storageKey = localStorage.key(indexCounter);
+        let retrievedObject = JSON.parse(localStorage.getItem(storageKey));
         let newObject = {todo: retrievedObject.todo, done: retrievedObject.done};
         savedTaskArray[indexCounter] = newObject;
         indexCounter++;
     }
+    //  To fix errors with keys, clear storage and resave
+    localStorage.clear();
+    let reIndex = 0;
+    savedTaskArray.forEach(item => {
+        saveToLocal(item, reIndex);
+        reIndex++;
+    });
     return savedTaskArray;
 }
 

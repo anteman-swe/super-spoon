@@ -1,4 +1,4 @@
-# super-spoon
+# super-spoon - Todo-lista för kursen introduktion till webbutveckling
 Skapa en webbapplikation för ToDo som innehåller HTML, CSS och JavaScript uppdelade i separata filer.
 
 Skriva in en uppgift i ett &lt;input&gt;-fält

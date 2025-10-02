@@ -67,6 +67,7 @@ const addRowToHTML = (taskItem) => {
             if(taskItem.done){
                 itemText.classList.add('itemDone');
             }
+            itemText.classList.add('list-text-content');
             itemText.addEventListener('click', changeTask);
             itemText.addEventListener('dblclick', removeTask);
             
@@ -88,7 +89,7 @@ const updateReady = (readyCount) => {
     }
     else {
         readyItems.textContent = `${readyCount} uppgifter färdiga`;
-        readyItems.style.backgroundColor = 'rgb(0, 255, 0, 0.1)';
+        readyItems.style.backgroundColor = 'rgb(0, 255, 0, 0.4)';
     }
 }
 
